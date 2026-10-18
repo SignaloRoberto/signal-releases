@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SIGNAL – Einer von euch ist keine Person</title>
+<meta name="description" content="SIGNAL ist ein Voice-Partyspiel: Ihr redet über Funk, alle mit derselben Stimme – und irgendwo zwischen euch sitzt eine KI." />
+<link rel="icon" type="image/png" href="icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Chakra+Petch:wght@600;700&display=swap" rel="stylesheet" />
+<style>
+  :root { --bg: #060812; --glass: rgba(16,22,46,.9); --line: rgba(255,255,255,.1); --text: #eef1ff; --muted: #a1a9cf; --accent: #ffb627; --accent2: #ff8f1f; --machine: #31e1ff; --whisper: #b98bff; --onair: #ff4d5e; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { background: radial-gradient(1100px 700px at 75% -10%, #1b2552 0%, transparent 60%), radial-gradient(900px 600px at -10% 100%, #2a1640 0%, transparent 55%), var(--bg); color: var(--text); font-family: 'Barlow', system-ui, sans-serif; font-size: 18px; line-height: 1.5; min-height: 100vh; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  header { display: flex; align-items: center; gap: 12px; padding: 24px 0; font-family: 'Chakra Petch'; font-weight: 700; letter-spacing: .1em; font-size: 22px; }
+  header img { width: 40px; height: 40px; }
+  .hero { display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; padding: 48px 0 72px; }
+  h1 { font-family: 'Chakra Petch'; font-weight: 700; font-size: clamp(64px, 10vw, 140px); line-height: .85; margin: 0; background: linear-gradient(180deg, #fff 30%, #b8c2ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  h1 em { font-style: normal; background: linear-gradient(180deg, #ffd27a, var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .tag { font-size: clamp(20px, 2vw, 26px); color: var(--muted); margin: 20px 0 32px; }
+  .tag b { color: var(--text); font-weight: 600; }
+  .btn { display: inline-flex; align-items: center; gap: 12px; padding: 20px 34px; border-radius: 14px; font-family: 'Chakra Petch'; font-weight: 700; font-size: 22px; letter-spacing: .05em; text-transform: uppercase; text-decoration: none; color: #241300; background: linear-gradient(180deg, #ffcb5c, var(--accent) 45%, var(--accent2)); box-shadow: 0 6px 0 #a85d00, 0 18px 40px rgba(255,150,30,.25); transition: transform .1s, box-shadow .1s; }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 0 #a85d00, 0 22px 50px rgba(255,150,30,.35); }
+  .btn:active { transform: translateY(4px); box-shadow: 0 2px 0 #a85d00; }
+  .btn svg { width: 26px; height: 26px; }
+  .meta { color: var(--muted); font-size: 15px; margin-top: 16px; }
+  .radio { position: relative; aspect-ratio: 1; max-width: 420px; justify-self: center; width: 100%; display: grid; place-items: center; }
+  .radio i { position: absolute; inset: 0; border-radius: 50%; border: 3px solid var(--accent); opacity: 0; animation: ring 3s ease-out infinite; }
+  .radio i:nth-child(2) { animation-delay: 1s; } .radio i:nth-child(3) { animation-delay: 2s; }
+  @keyframes ring { from { transform: scale(.3); opacity: .8; } to { transform: scale(1); opacity: 0; } }
+  .radio img { width: 46%; filter: drop-shadow(0 20px 50px rgba(0,0,0,.5)); }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; padding-bottom: 72px; }
+  .card { background: var(--glass); border: 1px solid var(--line); border-radius: 18px; padding: 26px; }
+  .card .ic { font-size: 38px; margin-bottom: 10px; }
+  .card h3 { font-family: 'Chakra Petch'; font-weight: 700; font-size: 22px; margin: 0 0 6px; }
+  .card p { margin: 0; color: var(--muted); font-size: 16px; }
+  h2 { font-family: 'Chakra Petch'; font-weight: 700; font-size: 36px; margin: 0 0 22px; }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; padding-bottom: 72px; }
+  .step { position: relative; padding: 24px 24px 24px 80px; background: var(--glass); border: 1px solid var(--line); border-radius: 18px; }
+  .step b { position: absolute; left: 22px; top: 22px; width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: #241300; font-family: 'Chakra Petch'; font-size: 22px; }
+  .step h3 { margin: 0 0 4px; font-family: 'Chakra Petch'; font-size: 19px; }
+  .step p { margin: 0; color: var(--muted); font-size: 15px; }
+  .note { background: rgba(255,182,39,.08); border: 1px solid rgba(255,182,39,.3); border-radius: 14px; padding: 16px 20px; color: #ffe3ad; font-size: 15px; margin-bottom: 72px; }
+  footer { color: #5d6690; font-size: 14px; padding: 24px 0 40px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  footer a { color: inherit; }
+  @media (max-width: 860px) { .hero, .cards, .steps { grid-template-columns: 1fr; } .radio { max-width: 280px; } }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header><img src="icon.png" alt="" /> SIGNAL</header>
+    <section class="hero">
+      <div>
+        <h1>SIG<em>N</em>AL</h1>
+        <p class="tag">Ein Funknetz. Alle klingen gleich.<br /><b>Einer von euch ist keine Person.</b></p>
+        <a class="btn" id="dl" href="https://github.com/SignaloRoberto/signal-releases/releases/latest">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" /></svg>
+          Für Windows laden
+        </a>
+        <div class="meta" id="meta">Kostenlos · Early Access · Windows 10/11</div>
+      </div>
+      <div class="radio"><i></i><i></i><i></i><img src="icon.png" alt="SIGNAL" /></div>
+    </section>
+
+    <section class="cards">
+      <div class="card"><div class="ic">📻</div><h3>Alle durch die Maschine</h3><p>Jede Stimme wird erkannt und von derselben Funkstimme nachgesprochen. Statt Namen gibt es nur Nummern.</p></div>
+      <div class="card"><div class="ic">🤖</div><h3>Eine KI unter euch</h3><p>Vielleicht eine. Vielleicht zwei. Vielleicht keine. Findet sie, bevor ihr den falschen Freund rauswerft.</p></div>
+      <div class="card"><div class="ic">🎭</div><h3>Der Reveal</h3><p>Am Ende wird alles aufgedeckt – und das ganze Gespräch läuft nochmal mit euren echten Stimmen.</p></div>
+      <div class="card"><div class="ic">🤫</div><h3>Der Flüsterer</h3><p>Ein Mensch arbeitet heimlich für die KI und flüstert ihr Insiderwissen zu.</p></div>
+      <div class="card"><div class="ic">🃏</div><h3>Sonderrunden</h3><p>Gruppenfrage, Schnellfunk, Lügenrunde – kein Spiel ist wie das andere.</p></div>
+      <div class="card"><div class="ic">🏆</div><h3>Punkte & Titel</h3><p>„Sherlock“, „Verdächtigster Mensch“, „Publikumsliebling“ – und eine Rangliste für den ganzen Abend.</p></div>
+    </section>
+
+    <h2>So geht's los</h2>
+    <section class="steps">
+      <div class="step"><b>1</b><h3>Installieren</h3><p>Setup laden und starten. Windows fragt evtl. nach – „Weitere Informationen“ → „Trotzdem ausführen“.</p></div>
+      <div class="step"><b>2</b><h3>Einer hostet</h3><p>Der Host lädt einmalig das KI-Gehirn (4,6 GB). Alle anderen brauchen nur das Spiel.</p></div>
+      <div class="step"><b>3</b><h3>Code eingeben</h3><p>Freunde klicken auf „Beitreten“ und geben den Code vom Host ein. Fertig.</p></div>
+    </section>
+
+    <div class="note">Für den Host empfohlen: eine Grafikkarte mit 6 GB oder mehr. Kopfhörer für alle – sonst hört das Mikro die Funkstimmen mit. Updates kommen automatisch.</div>
+
+    <footer>
+      <span>© SIGNAL · Early Access</span>
+      <span><a href="https://github.com/SignaloRoberto/signal-releases/releases">Alle Versionen</a></span>
+    </footer>
+  </div>
+  <script>
+    fetch('https://api.github.com/repos/SignaloRoberto/signal-releases/releases/latest')
+      .then((r) => r.json())
+      .then((rel) => {
+        const exe = (rel.assets || []).find((a) => /Setup.*\.exe$/.test(a.name));
+        if (exe) {
+          document.getElementById('dl').href = exe.browser_download_url;
+          document.getElementById('meta').textContent = `Version ${rel.tag_name.replace(/^v/, '')} · ${Math.round(exe.size / 1e6)} MB · Windows 10/11 · Kostenlos`;
+        }
+      })
+      .catch(() => {});
+  </script>
+</body>
+</html>
